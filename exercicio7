@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class testanto {
+	public static void main(String[] args){
+		Scanner s = new Scanner(System.in);
+		String nome, homemMaisAlto = "não informado", mulherMaisGorda = "não informado", nomesHomensPesoEIdade = "", nomesDasMulheresMenorDe18 = "";
+		short sexo, idade, qtdHomens = 0, qtdMulheres = 0;
+		double altura, alturaTotal = 0, peso, pesoTotal = 0, auxHomemMaisAlto = 0, auxMulherMaisGorda = 0;
+		
+		for(int i = 1; i <= 3; i++){
+			System.out.print("Informe o nome: ");
+			nome = s.next();
+			System.out.print("Informe o sexo (1 - homem; 2 - mulher): ");
+			sexo = s.nextShort();
+			System.out.print("Informe a idade: ");
+			idade = s.nextShort();
+			System.out.print("Informe a altura: ");
+			altura = s.nextFloat();
+			System.out.print("Informe o peso: ");
+			peso = s.nextFloat();
+			
+			if(sexo == 1){ //homem
+				qtdHomens++;
+				alturaTotal += altura;
+				if(altura > auxHomemMaisAlto){
+					auxHomemMaisAlto = altura;
+					homemMaisAlto = nome;
+				}
+				if(peso > 90 && idade > 50)
+					nomesHomensPesoEIdade = nomesHomensPesoEIdade + ", " + nome;
+			}
+			if(sexo == 2){ //mulher
+				qtdMulheres++;
+				pesoTotal += peso;
+				if(peso > auxMulherMaisGorda){
+					auxMulherMaisGorda = peso;
+					mulherMaisGorda = nome;
+				}
+				if(idade < 18)
+					nomesDasMulheresMenorDe18 = nomesDasMulheresMenorDe18 + ", " + nome;
+			}
+		}
+		System.out.println("A média das alturas dos homens é: " + (alturaTotal/qtdHomens));
+		System.out.println("A média dos pesos das mulheres é: " + (pesoTotal/qtdMulheres));
+		System.out.println("Nome dos homens com mais de 90KG e idade superior a 50: " + nomesHomensPesoEIdade);
+		System.out.println("Nome das mulheres com menos de 18 anos: " + nomesDasMulheresMenorDe18);
+		System.out.println("Homem mais alto é: " + homemMaisAlto);
+		System.out.println("Mulher mais gorda: " + mulherMaisGorda);
+	}
+}
