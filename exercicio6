@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class testanto {
+	public static void main(String[] args){
+		Scanner s = new Scanner(System.in);
+		float altura, maisAlta = 0, segundaMaisAlta = 0, auxMaisAlta = 0;
+		for(int i = 1; i <= 200; i++){
+			System.out.print("Digite a "+i+"° altura: ");
+			altura = s.nextFloat();
+			
+			if(altura > maisAlta){
+				auxMaisAlta = maisAlta;
+				maisAlta = altura;
+			}
+			if(altura > segundaMaisAlta && segundaMaisAlta < maisAlta)
+				segundaMaisAlta = auxMaisAlta;
+		}
+		
+		System.out.println("A maior altura é: " + maisAlta);
+		System.out.println("A segunda maior altura é: " + segundaMaisAlta);
+	}
+
+}
