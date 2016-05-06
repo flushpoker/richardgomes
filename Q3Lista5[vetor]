@@ -1,0 +1,53 @@
+import java.util.Scanner;
+public class aula {	
+	public static void main(String[] args){
+		Scanner s = new Scanner(System.in);
+
+		System.out.print("Informe a quantidade de sócios: ");
+		short qtdSocios = s.nextShort();
+
+		String nome[] = new String[qtdSocios];
+		int indiceMaisAlto = 0, indiceMaisBaixo = 0;
+		float maisAlto = Float.MIN_VALUE, maisBaixo = Float.MAX_VALUE;
+		float altura[] = new float[qtdSocios];
+		float aux;
+
+		for(int i = 0; i < qtdSocios; i++){
+			System.out.print("Nome do "+(i+1)+" sócio: ");
+			nome[i] = s.next();
+			System.out.print("Altura do "+(i+1)+" sócio: ");
+			altura[i] = s.nextFloat();
+		}
+		System.out.println("\n------ Vetor antes da organização ------ ");
+		for(int i = 0; i < qtdSocios; i++)
+			System.out.println(nome[i].toUpperCase() + " - " + altura[i]);
+		
+		for(int i = 0; i < qtdSocios; i++){
+			for(int j = 0; j < qtdSocios - 1; j++){
+				if(altura[j] > altura[j+1]){
+					aux = altura[j];
+					altura[j] = altura[j + 1];
+					altura[j + 1] = aux;
+				}
+			}
+		}
+		System.out.println("\n------ Vetor depois da organização ------ ");
+		for(int i = 0; i < qtdSocios; i++)
+			System.out.println(nome[i].toUpperCase() + " - " + altura[i]);
+		
+		for(int i = 0; i < qtdSocios; i++){
+			if(altura[i] > maisAlto){
+				maisAlto = altura[i];
+				indiceMaisAlto = i;
+			}
+			if(altura[i] < maisBaixo){
+				maisBaixo = altura[i];
+				indiceMaisBaixo = i;
+			}
+		}
+		System.out.println("\n------ Dados ------ ");
+		System.out.println(nome[indiceMaisAlto].toUpperCase() + " é o sócio mais alto, com " + altura[indiceMaisAlto]);
+		System.out.println(nome[indiceMaisBaixo].toUpperCase() + " é o sócio mais baixo, com " + altura[indiceMaisBaixo]);
+		s.close();
+	}
+}
