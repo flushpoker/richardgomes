@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class testanto {
+	public static void main(String[] args){
+		Scanner s = new Scanner(System.in);
+
+		System.out.print("Quantidade de alunos: ");
+		byte qtdAlunos = s.nextByte();
+
+		final byte qtdColunas = 3;
+		final byte notasP1 = 0;
+		final byte notasP2 = 1;
+		final byte mediaP1P2 = 2;
+
+		String nome[] = new String[qtdAlunos];
+		String situacao[] = new String[qtdAlunos];
+
+		float aluno[][] = new float[qtdAlunos][qtdColunas]; //0: nota p1, 1: nota p2, 2: média
+		for(int i = 0; i < qtdAlunos; i++){
+			System.out.print("Informe o "+(i+1)+"° nome: ");
+			nome[i] = s.next();
+			System.out.print("Informe a nota da P1: ");
+			aluno[i][notasP1] = s.nextFloat();
+			System.out.print("Informe a nota da P2: ");
+			aluno[i][notasP2] = s.nextFloat();
+
+			aluno[i][mediaP1P2] = (aluno[i][notasP1] + aluno[i][notasP2])/2; //faz a média e salva na 3° coluna
+
+			if(aluno[i][mediaP1P2] >= 7) //saber situação do aluno
+				situacao[i] = "aprovado";
+			else if(aluno[i][mediaP1P2] >= 4)
+				situacao[i] = "na final";
+			else if(aluno[i][mediaP1P2] >= 0)
+				situacao[i] = "reprovado";
+
+		}
+
+		System.out.println("\n----- Situação dos alunos -----");
+		for(int i = 0; i < qtdAlunos; i++){
+			System.out.println(nome[i] + " tem p1(" +aluno[i][notasP1]+ "), p2(" +aluno[i][notasP2]+ "), média (" +aluno[i][mediaP1P2]+ ") e está ["+situacao[i].toUpperCase()+"]");
+		}
+		s.close();
+	}
+}
