@@ -1,0 +1,33 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class aula {
+	public static void main(String[] args){
+
+		Random r = new Random();
+
+		Scanner s = new Scanner(System.in);
+		int tamanhoVetores = 5;
+		int vetorA[] = new int[tamanhoVetores];
+		int vetorB[] = new int[tamanhoVetores];
+		int vetorC[] = new int[tamanhoVetores];
+
+		for(int i = 0; i < tamanhoVetores; i++){
+			vetorA[i] = r.nextInt(5);
+			vetorB[i] = r.nextInt(5);
+			vetorC[i] = vetorA[i] + vetorB[i];
+		}
+		System.out.println("\n----- Vetor A -----");
+		for(int i = 0; i < tamanhoVetores; i++)
+			System.out.print(vetorA[i] + " ");
+
+		System.out.println("\n----- Vetor B -----");
+		for(int i = 0; i < tamanhoVetores; i++)
+			System.out.print(vetorB[i] + " ");
+
+		System.out.println("\n----- Vetor C -----");
+		for(int i = 0; i < tamanhoVetores; i++)
+			System.out.print(vetorC[i] + " ");
+		s.close();
+	}
+}
