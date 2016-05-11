@@ -1,0 +1,26 @@
+package quintaListaPI;
+import java.util.Scanner;
+public class Q1 {
+
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		byte tamanhoVetor = 4;
+		int numero[] = new int[tamanhoVetor], peso[] = new int[tamanhoVetor];
+		float somaFatorEPeso = 0, somaPeso = 0;
+		int i = 0;
+		
+		while(i < tamanhoVetor){
+			if(numero[i] >= 0){
+				System.out.print("Digite o "+(i+1)+"° número: ");
+				numero[i] = s.nextInt();
+				System.out.print("Digite o "+(i+1)+"° peso: ");
+				peso[i] = s.nextInt();
+				somaFatorEPeso += numero[i] * peso[i];
+				somaPeso += peso[i];
+				i++;
+			}
+		}
+		System.out.printf("A média ponderada é: %.2f",(somaFatorEPeso/somaPeso));
+		s.close();
+	}
+}
