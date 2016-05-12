@@ -1,0 +1,88 @@
+package quintaListaPI;
+import java.util.Scanner;
+
+public class Q5 {
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+
+		float valorVenda[];
+		byte tamanhoVetor = 2, mesVenda[], zero = 0, um = 1;
+		
+		int i = 0, qtdTotal = 0, valorTotal = 0,
+				jan[] = new int[tamanhoVetor], fev[] = new int[tamanhoVetor], mar[] = new int[tamanhoVetor], abr[] = new int[tamanhoVetor],
+				mai[] = new int[tamanhoVetor], jun[] = new int[tamanhoVetor], jul[] = new int[tamanhoVetor], ago[] = new int[tamanhoVetor],
+				set[] = new int[tamanhoVetor], out[] = new int[tamanhoVetor], nov[] = new int[tamanhoVetor], dez[] = new int[tamanhoVetor];
+		//1 = valor das vendas; 0 = qtd vendas
+		do{
+			valorVenda = new float[i+1];
+			mesVenda = new byte[i+1];
+			System.out.print("Informe o valor da venda (0 para sair): ");
+			valorVenda[i] = s.nextFloat();
+			if(valorVenda[i] <= 0)
+				break;
+			if(valorVenda[i] != 0){
+				System.out.print("Informe o mês da venda [1 a 12]: ");
+				mesVenda[i] = s.nextByte();
+
+				byte b = mesVenda[i];
+				if (b == 1) {
+					jan[zero]++;
+					jan[um] += valorVenda[i];
+				} else if (b == 2) {
+					fev[zero]++;
+					fev[um] += valorVenda[i];
+				} else if (b == 3) {
+					mar[zero]++;
+					mar[um] += valorVenda[i];
+				} else if (b == 4) {
+					abr[zero]++;
+					abr[um] += valorVenda[i];
+				} else if (b == 5) {
+					mai[zero]++;
+					mai[um] += valorVenda[i];
+				} else if (b == 6) {
+					jun[zero]++;
+					jun[um] += valorVenda[i];
+				} else if (b == 7) {
+					jul[zero]++;
+					jul[um] += valorVenda[i];
+				} else if (b == 8) {
+					ago[zero]++;
+					ago[um] += valorVenda[i];
+				} else if (b == 9) {
+					set[zero]++;
+					set[um] += valorVenda[i];
+				} else if (b == 10) {
+					out[zero]++;
+					out[um] += valorVenda[i];
+				} else if (b == 11) {
+					nov[zero]++;
+					nov[um] += valorVenda[i];
+				} else if (b == 12) {
+					dez[zero]++;
+					dez[um] += valorVenda[i];
+				} else {
+					System.out.println("Valor incorreto.");
+				}
+				qtdTotal++;
+				valorTotal += valorVenda[i];
+				i++;
+			}
+		}while(valorVenda[i-1] != 0);
+		System.out.println("\n-----------------");
+		System.out.println("Ano todo foram " + qtdTotal + " vendas com valor de: R$" + valorTotal);
+		System.out.println("Janeiro foram " + jan[zero] + " vendas com valor de: R$" + jan[um]);
+		System.out.println("Fevereiro foram " + fev[zero] + " vendas com valor de: R$" + fev[um]);
+		System.out.println("Março foram " + mar[zero] + " vendas com valor de: R$" + mar[um]);
+		System.out.println("Abril foram " + abr[zero] + " vendas com valor de: R$" + abr[um]);
+		System.out.println("Maio foram " + mai[zero] + " vendas com valor de: R$" + mai[um]);
+		System.out.println("Junho foram " + jun[zero] + " vendas com valor de: R$" + jun[um]);
+		System.out.println("Julho: foram " + jul[zero] + " vendas com valor de: R$" + jul[um]);
+		System.out.println("Agosto foram " + ago[zero] + " vendas com valor de: R$" + ago[um]);
+		System.out.println("Setembro foram " + set[zero] + " vendas com valor de: R$" + set[um]);
+		System.out.println("Outubro foram " + out[zero] + " vendas com valor de: R$" + out[um]);
+		System.out.println("Novembro foram " + nov[zero] + " vendas com valor de: R$" + nov[um]);
+		System.out.println("Dezembro foram " + dez[zero] + " vendas com valor de: R$" + dez[um]);
+		s.close();
+	}
+}
