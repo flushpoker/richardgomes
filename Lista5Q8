@@ -1,0 +1,33 @@
+package quintaListaPI;
+import java.util.Scanner;
+public class Q8 {
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+
+		byte qtdCadeia = 20;
+		String cadeia[] = new String[qtdCadeia];
+		String cadeiaInvertida[] = new String[qtdCadeia];
+		for(int i = 0; i < cadeia.length; i++){
+			System.out.print("Informe a "+(i+1)+"° cadeia (com até 39 caracteres): ");
+			cadeia[i] = s.next();
+			//palavraAux = cadeia[i];
+			while(cadeia[i].length() > 39){
+				System.out.print("Cadeia com mais de 39 caracteres, informe novamente: ");
+				cadeia[i] = s.next();
+			}
+
+			cadeiaInvertida[i] = "";
+			for(int j = cadeia[i].length()-1; j >= 0; j--){
+				cadeiaInvertida[i] += cadeia[i].charAt(j);
+			}
+		}
+		System.out.println("\n---------- Resultado ----------");
+		for(int i = 0; i < cadeia.length; i++){
+			System.out.print("\t" + cadeia[i]);
+			System.out.print("\t" + cadeiaInvertida[i]);
+			System.out.println();
+		}
+
+		s.close();
+	}
+}
