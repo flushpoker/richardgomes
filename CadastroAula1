@@ -1,0 +1,53 @@
+import java.util.Scanner;
+public class principal {
+	public static void main(String[]args){
+		Scanner s = new Scanner(System.in);
+		RegistroAluno regAluno[] = new RegistroAluno[2];
+		byte menu;
+		boolean alunoCadastrado = false;
+		int i = 0, qtdCadastros = 0;
+		
+		do{
+			System.out.println("\n------ Menu ------");
+			System.out.print("1 - Cadastrar usuário" +
+					"\n2 - Listar usuários" +
+					"\n3 - Sair: ");
+			menu = s.nextByte();
+			switch(menu){
+			case 1:
+				System.out.println("\n------ Inserir Alunos ------");
+				if(qtdCadastros < regAluno.length){
+					regAluno[i] = new RegistroAluno();
+					System.out.print("Nome: ");
+					regAluno[i].nome = s.next();
+					System.out.print("Cpf: ");
+					regAluno[i].cpf = s.next();			
+					System.out.print("Idade: ");
+					regAluno[i].idade = s.nextInt();
+					i++;
+					qtdCadastros++;
+					alunoCadastrado = true;
+				}else{
+					System.out.println("\n------ Error ------");
+					System.out.println("Não é possível inserir mais alunos");
+				}
+				break;
+			case 2:
+				if(alunoCadastrado == true){
+					System.out.println("\n------ Alunos ------");
+					for(int j = 0; j < qtdCadastros; j ++){
+						System.out.print("O nome é: " + regAluno[j].nome);
+						System.out.print(", cpf é: " + regAluno[j].cpf);
+						System.out.println(", idade é: " + regAluno[j].idade);
+					}
+				}else
+					System.out.println("Nenhum aluno cadastrado.");
+				break;
+			case 3:
+				System.out.println("Programa encerrado");
+				break;
+			}
+		}while(menu != 3);
+		s.close();
+	}
+}
