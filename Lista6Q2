@@ -1,0 +1,34 @@
+import java.util.Scanner;
+public class Lista6Q2 {
+	public static void main(String[] args){
+		Scanner s = new Scanner(System.in);
+		byte linhaA = 3, colunaA = 2;
+		byte linhaB = 2, colunaB = 3;
+		float auxValorMatriz = 0;
+		float matrizA[][] = new float[linhaA][colunaA];
+		float matrizB[][] = new float[linhaB][colunaB];
+		float matrizC[][] = new float[linhaA][colunaB];
+		System.out.println("------ Matriz A ------");
+		for(int i = 0; i < linhaA; i++){
+			for(int j = 0; j < colunaA; j++){
+				System.out.print("Informe o valor da "+(i+1)+"° linha e "+(j+1)+"° coluna matrizA: ");
+				matrizA[i][j] = s.nextFloat();
+			}
+		}
+		System.out.println("\n------ Matriz B ------");
+		for(int i = 0; i < linhaB; i++){
+			for(int j = 0; j < colunaB; j++){
+				System.out.print("Informe o valor da "+(i+1)+"° linha e "+(j+1)+"° coluna matrizB: ");
+				matrizB[i][j] = s.nextFloat();
+				//matrizC[i][j] = (matrizA[i][j] * matrizB[i][j]) + (matrizA[i][j+1] * matrizB[i+1][j]);
+			}
+		}
+		System.out.println("\n------ Resultado ------");
+		for(int i = 0; i < 3; i++){
+			for(int j = 0; j < 3; j++){
+				System.out.print((matrizA[i][i] * matrizB[i][j]) + (matrizA[i][j+1] * matrizB[i+1][j]) + " ");
+			}
+			System.out.println();
+		}
+	}
+}
