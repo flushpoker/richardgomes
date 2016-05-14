@@ -1,10 +1,11 @@
+package sextaListaPI;
 import java.util.Scanner;
-public class Lista6Q2 {
+public class Q2 {
 	public static void main(String[] args){
 		Scanner s = new Scanner(System.in);
 		byte linhaA = 3, colunaA = 2;
 		byte linhaB = 2, colunaB = 3;
-		float auxValorMatriz = 0;
+		//float auxValorMatriz = 0;
 		float matrizA[][] = new float[linhaA][colunaA];
 		float matrizB[][] = new float[linhaB][colunaB];
 		float matrizC[][] = new float[linhaA][colunaB];
@@ -24,11 +25,20 @@ public class Lista6Q2 {
 			}
 		}
 		System.out.println("\n------ Resultado ------");
-		for(int i = 0; i < 3; i++){
-			for(int j = 0; j < 3; j++){
-				System.out.print((matrizA[i][i] * matrizB[i][j]) + (matrizA[i][j+1] * matrizB[i+1][j]) + " ");
+		for(int i = 0; i < linhaA; i++){
+			for(int j = 0; j < linhaA; j++){
+				for(int k = 0; k < colunaA; k++){
+					matrizC[i][j] = matrizC[i][j] + (matrizA[i][k] * matrizB[k][j]);
+				}
+			}
+		}
+		for(int i = 0; i < linhaA; i++){
+			for(int j = 0; j < colunaB; j++){
+				System.out.print(matrizC[i][j] + " ");
+
 			}
 			System.out.println();
 		}
+		s.close();
 	}
 }
