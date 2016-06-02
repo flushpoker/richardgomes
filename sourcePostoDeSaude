@@ -1,0 +1,299 @@
+import java.util.Scanner;
+public class classeMain {
+	static ClasseCadastroDePacientes registroPaciente[] = new ClasseCadastroDePacientes[1]; // cria o registro
+	static ClasseCadastroDeMedicos registroMedico[] = new ClasseCadastroDeMedicos[1];// cria o registro
+	static ClasseConsultas registroConsulta[] = new ClasseConsultas[1];// cria o registro
+
+	static ClasseCadastroDePacientes registroPacienteBackup[];// cria o backup de registroPacienteBackup
+	static ClasseCadastroDeMedicos registroMedicoBackup[];// cria o backup de registroMedicoBackup
+	static ClasseConsultas registroConsultaBackup[];// cria o backup de registroConsultaBackup
+
+	static int qtdMedicosCadastrados = 0, qtdPacientesCadastrados = 0, qtdConsultasCadastradas = 0, opcaoMenu, idPaciente = -1, idMedico = -1, 
+			idConsulta = -1, iPacientes = 0, iMedicos = 0, iConsultas = 0; // cria variaveis necessárias para execução do programa
+
+	static Scanner s = new Scanner(System.in);
+	public static void main(String[] args) {
+		byte opcaoInclusaoAutomatica;
+
+		System.out.print("Deseja incluir alguns registros automaticamente (1 - Sim, Qlq = qualquer - Não)?: ");
+		opcaoInclusaoAutomatica = s.nextByte();
+		if(opcaoInclusaoAutomatica == 1){//sim
+			String valoresPacientes[][] = {// cria uma matriz com os dados dos pacientes
+					{"Richard", "Alisson", "08/05/1996", "105.114.084.63", "20"}, 
+					{"Cecília", "Milena", "22/11/1994", "806.011.758-08", "18"}, 
+					{"Antônia", "Pietra", "08/08/1994", "566.963.695-38", "20"}, 
+					{"Débora", "Regina", "26/04/1997", "814.248.124-41", "19"},
+					{"Djalma", "Junior", "12/09/2000", "254.848.722-73", "15"},
+			};
+			registroPaciente = new ClasseCadastroDePacientes[valoresPacientes.length + 1];//modifica o tamanho do registro para caber os dados(+1 para não dar error por conta do backup)
+			for(int i = 0; i < valoresPacientes.length; i++){// joga os valores da matriz para o registro de pacientes
+				registroPaciente[i] = new ClasseCadastroDePacientes();
+				registroPaciente[i].nomePaciente = valoresPacientes[i][0].toUpperCase();
+				registroPaciente[i].sobrenomePaciente = valoresPacientes[i][1].toUpperCase();
+				registroPaciente[i].dataNascimento = valoresPacientes[i][2];
+				registroPaciente[i].cpf = valoresPacientes[i][3];
+				registroPaciente[i].idade = Short.parseShort(valoresPacientes[i][4]);
+				registroPaciente[i].status = true;
+				qtdPacientesCadastrados++;
+				iPacientes++;
+			}
+			String valoresMedicos[][] = {// cria uma matriz com os dados dos médicos
+					{"Diogo", "Benício", "54687"}, 
+					{"Alex", "Matheus", "16481"}, 
+					{"Manuela", "Joana", "10674"}, 
+					{"Lívia", "Isabelle", "35487"}
+			};
+			registroMedico = new ClasseCadastroDeMedicos[valoresMedicos.length + 1];//modifica o tamanho do registro para caber os dados(+1 para não dar error por conta do backup)
+			for(int i = 0; i < valoresMedicos.length; i++){// joga os valores da matriz para o registro de médicos
+				registroMedico[i] = new ClasseCadastroDeMedicos();
+				registroMedico[i].nomeMedico = valoresMedicos[i][0].toUpperCase();
+				registroMedico[i].sobrenomeMedico = valoresMedicos[i][1].toUpperCase();
+				registroMedico[i].CRM = valoresMedicos[i][2];
+				registroMedico[i].status = true;
+				qtdMedicosCadastrados++;
+				iMedicos++;
+			}
+			String valoresConsulta[][] = {// cria uma matriz com os dados das consultas
+					{"Richard", "Diogo", "02/06/2016"}, 
+					{"Cecília", "Alex", "11/06/2016"}, 
+					{"Antônia", "Manuela", "21/06/2016"}, 
+					{"Djalma", "Lívia", "01/07/2016"}
+			};
+			registroConsulta = new ClasseConsultas[valoresConsulta.length  + 1];//modifica o tamanho do registro para caber os dados(+1 para não dar error por conta do backup)
+			for(int i = 0; i < valoresConsulta.length; i++){// joga os valores da matriz para o registro de consultas
+				registroConsulta[i] = new ClasseConsultas();
+				registroConsulta[i].paciente = valoresConsulta[i][0].toUpperCase();
+				registroConsulta[i].nomeMedico = valoresConsulta[i][1].toUpperCase();
+				registroConsulta[i].dataConsulta = valoresConsulta[i][2];
+				qtdConsultasCadastradas++;
+				iConsultas++;
+			}
+		}
+
+		do{
+			System.out.println("------- RL posto de saúde -------");
+			System.out.print("1 - Pacientes"
+					+ "\n2 - Médicos"
+					+ "\n3 - Consultas"
+					+ "\n4 - Sair: ");
+			opcaoMenu = s.nextByte(); // opções de menu
+
+			switch(opcaoMenu){ // switch para operar as decisões do menu
+			case 1://Pacientes
+				System.out.println("\n------- Pacientes do posto de saúde -------");
+				System.out.print("1 - Cadastrar novo paciente"
+						+ "\n2 - Listar pacientes"
+						+ "\n3 - Desativar paciente"
+						+ "\nQlq - Voltar: ");
+				byte opcaoMenuCase1 = s.nextByte();
+				if(opcaoMenuCase1 == 1){//Cadastrar
+					System.out.println("\n------- Cadastrar paciente -------");
+					registroPaciente[iPacientes] = new ClasseCadastroDePacientes();
+					System.out.print("Informe o nome: ");
+					registroPaciente[iPacientes].nomePaciente = s.next().toUpperCase();
+					System.out.print("Informe o sobrenome: ");
+					registroPaciente[iPacientes].sobrenomePaciente = s.next().toUpperCase();
+					System.out.print("Informe a data de nascimento (ex: 31/12/9999): ");
+					registroPaciente[iPacientes].dataNascimento = s.next();
+					System.out.print("Informe o cpf: ");
+					registroPaciente[iPacientes].cpf = s.next();			
+					System.out.print("Informe a idade: ");
+					registroPaciente[iPacientes].idade = s.nextShort();
+					registroPaciente[iPacientes].status = true;
+					qtdPacientesCadastrados++;
+					iPacientes++;
+					registroPacienteBackup = registroPaciente.clone(); //clona os dois vetores
+					registroPaciente = new ClasseCadastroDePacientes[registroPaciente.length+1]; //instancia o vetor com seu tamanho + 1
+					for(int i = 0; i < registroPacienteBackup.length; i++) //copia os dados de um vetor para o outro
+						registroPaciente[i] = registroPacienteBackup[i];
+
+					System.out.println("Paciente incluído com sucesso");
+				}
+				else if(opcaoMenuCase1 == 2){//
+					ListarPacientes(registroPaciente);//Listar
+				}
+				else if(opcaoMenuCase1 == 3){//Desativar
+					if(registroPaciente.length > 1){// checa se há algum cadastro
+						while(idPaciente == -1){
+							System.out.println("Informe o id do paciente para lhe desabilitar (-1 se não souber o id): ");
+							idPaciente = s.nextByte();
+
+							if(idPaciente == -1)
+								ListarPacientes(registroPaciente);
+						}
+						if((idPaciente < (registroPaciente.length - 1)) && idPaciente >= 0){//checa se o valor digitado é compatível com o tamanho do registro
+							if(registroPaciente[idPaciente].status != false){
+								registroPaciente[idPaciente].status = false;//torna o paciente inativo
+								System.out.println("Paciente desativado com sucesso");
+							}else
+								System.out.println("Paciente já está inativo");
+						}else
+							System.out.println("Valor incorreto");
+						idPaciente = -1;
+					}else
+						System.out.println("Nenhum paciente cadastrado");
+				}
+				break;
+			case 2:
+				System.out.println("\n------- Médicos do posto -------");
+				System.out.print("1 - Cadastrar médico"
+						+ "\n2 - Listar médicos"
+						+ "\n3 - Desativar médico"
+						+ "\nQlq - Voltar: ");
+				byte opcaoMenuCase2 = s.nextByte();
+				if(opcaoMenuCase2 == 1){
+					System.out.println("\n------- Cadastrar médico -------");
+					registroMedico[iMedicos] = new ClasseCadastroDeMedicos();
+					System.out.print("Informe o nome: ");
+					registroMedico[iMedicos].nomeMedico = s.next().toUpperCase();
+					System.out.print("Informe o sobrenome: ");
+					registroMedico[iMedicos].sobrenomeMedico = s.next().toUpperCase();
+					System.out.print("Informe o CRM: ");
+					registroMedico[iMedicos].CRM = s.next();
+					registroMedico[iMedicos].status = true;
+					qtdMedicosCadastrados++;
+					iMedicos++;
+					registroMedicoBackup = registroMedico.clone(); //clona os dois vetores
+					registroMedico = new ClasseCadastroDeMedicos[registroMedico.length+1]; //instancia o vetor com seu tamanho + 1
+					for(int i = 0; i < registroMedicoBackup.length; i++) //copia os dados de um vetor para o outro
+						registroMedico[i] = registroMedicoBackup[i];
+
+					System.out.println("Médico incluído com sucesso");
+
+				}
+				else if(opcaoMenuCase2 == 2){
+					ListarMedicos(qtdMedicosCadastrados, registroMedico);
+				}
+
+				else if(opcaoMenuCase2 == 3){
+					if(registroMedico.length > 1){// checa se há algum cadastro
+						while(idMedico == -1){
+							System.out.println("Informe o id do médico para lhe desabilitar (-1 se não souber o id): ");
+							idMedico = s.nextByte();
+
+							if(idMedico == -1)
+								ListarMedicos(qtdMedicosCadastrados, registroMedico);
+						}
+						if((idMedico < (registroMedico.length - 1)) && idMedico >= 0){//checa se o valor digitado é compatível com o tamanho do registro
+							if(registroMedico[idMedico].status != false){
+								registroMedico[idMedico].status = false;// torna o médico inativo
+								System.out.println("Médico desativado com sucesso");
+							}else
+								System.out.println("Médico já está inativo");
+						}else
+							System.out.println("Valor incorreto");
+						idMedico = -1;
+					}else
+						System.out.println("Nenhum médico cadastrado");
+				}
+				break;
+			case 3:
+				System.out.println("\n------- Consultas -------");
+				System.out.print("1 - Marcar consulta"
+						+ "\n2 - Listar consultas"
+						+ "\n3 - Editar consulta"
+						+ "\nQlq - Voltar: ");
+				byte opcaoMenuCase3 = s.nextByte();
+				if(opcaoMenuCase3 == 1){
+					registroConsulta[iConsultas] = new ClasseConsultas();
+					System.out.print("\nInforme o nome do paciente: ");
+					String auxPaciente = s.next().toUpperCase();
+					boolean pacienteRegistrado = false;
+					for(int i = 0; i < registroPaciente.length - 1; i++)
+						if(auxPaciente.equals(registroPaciente[i].nomePaciente))
+							pacienteRegistrado = true;
+
+					if(pacienteRegistrado == true){
+						System.out.print("Informe o nome do médico: ");
+						String auxMedico = s.next().toUpperCase();
+						boolean medicoRegistrado = false;
+						for(int i = 0; i < registroMedico.length - 1; i++)
+							if(auxMedico.equals(registroMedico[i].nomeMedico))
+								medicoRegistrado = true;
+						if(medicoRegistrado == true){
+							System.out.print("Informe a data (ex 31/12/9999): ");
+							registroConsulta[iConsultas].dataConsulta = s.next();
+
+							registroConsulta[iConsultas].paciente = auxPaciente;
+							registroConsulta[iConsultas].nomeMedico = auxMedico;
+							registroConsultaBackup = registroConsulta.clone(); //clona os dois vetores
+							registroConsulta = new ClasseConsultas[registroConsulta.length+1]; //instancia o vetor com seu tamanho + 1
+							for(int i = 0; i < registroConsultaBackup.length; i++) //copia os dados de um vetor para o outro
+								registroConsulta[i] = registroConsultaBackup[i];
+							qtdConsultasCadastradas++;
+							iConsultas++;
+							System.out.println("Consulta incluída com sucesso");
+						}else
+							System.out.println("Médico não cadastrado");
+					}else
+						System.out.println("Paciente não cadastrado");
+				}else if(opcaoMenuCase3 == 2){
+					ListarConsultas(qtdConsultasCadastradas, registroConsulta);
+				}else if(opcaoMenuCase3 == 3){
+					if(registroConsulta.length > 1){// checa se há algum cadastro
+						while(idConsulta == -1){
+							System.out.println("Informe o id da para editar (-1 se não souber o id): ");
+							idConsulta = s.nextByte();
+
+							if(idConsulta == -1)
+								ListarConsultas(qtdConsultasCadastradas, registroConsulta);
+							else{
+								if((idConsulta < (registroConsulta.length - 1)) && idConsulta >= 0)//checa se o valor digitado é compatível com o tamanho do registro
+									editarConsulta(idConsulta, registroConsulta);
+								else
+									System.out.println("Valor incorreto");
+							}
+						}
+					}else
+						System.out.println("Nenhuma consulta cadastrada");
+				}
+				break;
+			case 4:
+				System.out.println("\n------- Programa finalizado -------");
+				break;
+			default:
+				System.out.println("Opção inválida");				
+				break;
+			}
+			System.out.println();
+		}while(opcaoMenu != 4);
+		s.close();
+	}//fim main
+
+	public static void editarConsulta(int idConsulta, ClasseConsultas registroConsulta[]){
+		System.out.println("\n------- Editar consulta -------");
+		System.out.print("Informe o nome do paciente: ");
+		registroConsulta[idConsulta].paciente = s.next().toUpperCase();
+		System.out.print("Informe o nome do médico: ");
+		registroConsulta[idConsulta].nomeMedico = s.next().toUpperCase();
+		System.out.print("Informe a data (ex 31/12/9999): ");
+		registroConsulta[idConsulta].dataConsulta = s.next();
+		System.out.println("------- Edição concluída -------");
+
+	}
+	public static void ListarPacientes(ClasseCadastroDePacientes registroPaciente[]){
+		System.out.println("\n------- Listagem dos pacientes -------");
+		System.out.println("ID\t\t\tNOME\t\t\tSOBRENOME\t\t\tCPF\t\t\tIDADE\t\t\tSTATUS\n");
+		for(int ii = 0; ii < qtdPacientesCadastrados; ii++){
+			System.out.println(ii + "\t\t\t" + registroPaciente[ii].nomePaciente + "\t\t\t" + registroPaciente[ii].sobrenomePaciente+ "\t\t\t" + 
+					registroPaciente[ii].cpf + "\t\t\t" + registroPaciente[ii].idade + "\t\t\t" + ((registroPaciente[ii].status) == true ? "ativo" : "inativo"));
+		}
+	}
+	public static void ListarConsultas(int qtdConsultasCadastradas, ClasseConsultas registroConsulta[]){
+		System.out.println("\n------- Listagem das consultas -------");
+		System.out.println("ID\t\t\tPACIENTE\t\t\tMÉDICO\t\t\tDATA\n");
+		for(int ii = 0; ii < qtdConsultasCadastradas; ii++){
+			System.out.println(ii + "\t\t\t" + registroConsulta[ii].paciente + "\t\t\t" + registroConsulta[ii].nomeMedico + "\t\t\t" + 
+					registroConsulta[ii].dataConsulta);
+		}
+
+	}
+	public static void ListarMedicos(int qtdMedicosCadastrados, ClasseCadastroDeMedicos registroMedicos[]){
+		System.out.println("\n------- Listagem dos médicos -------");
+		System.out.println("ID\t\t\tNOME\t\t\tCRM\t\t\tSTATUS\n");
+		for(int ii = 0; ii < qtdMedicosCadastrados; ii++){
+			System.out.println(ii + "\t\t\t" + registroMedicos[ii].nomeMedico + "\t\t\t" + registroMedicos[ii].CRM + "\t\t\t" + 
+					((registroMedicos[ii].status) == true ? "ativo" : "inativo"));
+		}
+	}
+}
